@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video.js | HTML5 Video Player</title>
+
+  <!-- Chang URLs to wherever Video.js files will be hosted -->
+  <link href="video-js/video-js.css" rel="stylesheet" type="text/css">
+  <!-- video.js must be in the <head> for older IEs to work. -->
+  <script src="video-js/video.js"></script>
+  
+  <!-- Chang URLs to wherever Video.js files will be hosted -->
+  <link href="vis/vis.css" rel="stylesheet" type="text/css">
+  <!-- video.js must be in the <head> for older IEs to work. -->
+  <script src="vis/vis.js"></script>
+
+  <!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
+  <script>
+    videojs.options.flash.swf = "video-js/video-js.swf";
+  </script>
+
+</head>
+<body>
+<div id="vidPlayer" style="width:1200px; text-align:top;" align="left">
+<div id="video" style="width:65%; float:left">
+  <video id="example_video_1" class="video-js vjs-default-skin" data-setup='{}' controls preload="none" width="720" height="480"
+      poster="imgs/video1poster.png"
+      data-setup="{}">
+    <source src="videos/video1.mp4" type='video/mp4' />
+    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+  </video>
+</div>
+
+<div id="data" style="width:35%; float:right; text-align:left;">Percent of Video Downloaded:<font id="bufferPercent" color="red">0.00</font><br> Percent of Video Played: <font id="playPercent" color="green">0.00</font></div>
+
+<script type="text/javascript">
+    var myPlayer = videojs("example_video_1");
+    
+    setInterval(function(){
+        var percentDownloaded = myPlayer.bufferedPercent();
+        var lengthOfVideo = myPlayer.duration();
+        var curPlayTime = myPlayer.currentTime();
+        var percentPlayed = curPlayTime / lengthOfVideo;
+        document.getElementById("bufferPercent").innerHTML = String(percentDownloaded);
+        document.getElementById("playPercent").innerHTML = String(percentPlayed);
+    }, 100);
+
+</script>
+</div>
+
+</body>
+</html>
